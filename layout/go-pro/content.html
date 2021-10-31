@@ -1,0 +1,185 @@
+<div class="ma_page_content sfy_pc_padd">
+	<div class="ma_pc_inner">
+		<?php echo loadPage('sidebar/top-header')?>
+		<div class="page_padding">
+			<?php $loadPage = loadPage('thirdparty/paypal-demo'); echo (!empty($loadPage)) ? $loadPage : '';?>
+			<h3 class="light text-center"> {{LANG Discover more features with our Premium package!}}</h3>
+			<div class="row">
+				<div class="col-lg-2 col-md-1"></div>
+				<div class="col-lg-4 col-md-5">
+					<div class="content price_plans">
+						<h5>{{LANG Free Plan}}</h5>
+						<div class="pricing_p_price"><sup>$</sup><b>0.00</b></div>
+						<hr>
+						<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#41EAC5" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg> {{LANG Upload songs up to}} {{CONFIG pro_upload_limit}}MB</p>
+						<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fd9e97" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg> {{LANG Pro badge}}</p>
+						<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fd9e97" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg> {{LANG Spotlight your songs (featured)}}</p>
+						<?php if ($music->config->who_can_download == 'pro') {?>
+							<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fd9e97" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg> {{LANG Download songs}}</p>
+						<?php } else { ?>
+							<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#41EAC5" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg> {{LANG Download songs}}</p>
+						<?php } ?>
+						<!-- <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fd9e97" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path></svg> {{LANG Turn off comments/download}}</p> -->
+						<div class="button_go_pro">
+							<button class="btn btn-default btn-mat" onclick="location.href='{{LINK }}';">{{LANG Current Plan}}</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-5">
+					<div class="content price_plans">
+						<h5>{{LANG Pro Plan}}</h5>
+						<div class="pricing_p_price"><sup>{{CONFIG currency_symbol}}</sup><b>{{CONFIG pro_price}}</b><sub>/m</sub></div>
+						<hr>
+						<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#41EAC5" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg> {{LANG Upload unlimited songs}}</p>
+						<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#41EAC5" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg> {{LANG Pro badge}}</p>
+						<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#41EAC5" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg> {{LANG Spotlight your songs (featured)}}</p>
+						<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#41EAC5" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg> {{LANG Download songs}}</p>
+						<!-- <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#41EAC5" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg> {{LANG Turn off comments/download}}</p> -->
+						<div class="button_go_pro">
+							<button class="btn btn-primary btn-mat" onclick="$('#paymentpro_modal').modal('show');">{{LANG Upgrade}}</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-1"></div>
+			</div>
+			<section class="pro_features">
+				<div class="valign p_feat_innr">
+					<svg enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m494.933 216.448c0 142.845-99.868 265.74-238.933 295.552-139.371-29.867-238.933-153.024-238.933-295.552v-165.259c82.792 0 161.037-15.236 238.933-51.189 123.735 57.099 234.299 50.659 237.003 51.2z" fill="#6994ff"/><path d="m494.933 216.448c0 63.904-20.021 123.915-54.667 173.376-83.35 83.195-216.396 82.365-298.502 1.749-56.366-55.344-90.564-132.223-90.564-215.754v-125.355c70.773-3.595 140.299-20.693 204.8-50.464 74.507 34.382 152.861 51.189 236.949 51.189.1.02-.038-7.85 1.984 165.259z" fill="#80aaff"/><path d="m307.2 238.933c-9.426 0-17.067-7.641-17.067-17.067v-42.666c0-18.821-15.312-34.133-34.133-34.133s-34.133 15.312-34.133 34.133v42.667c0 9.426-7.641 17.067-17.067 17.067s-17.067-7.641-17.067-17.067v-42.667c0-37.642 30.624-68.267 68.267-68.267s68.267 30.624 68.267 68.267v42.667c0 9.425-7.641 17.066-17.067 17.066z" fill="#efd66c"/><path d="m358.4 228.693v122.88c0 11.315-9.165 20.48-20.48 20.48h-163.84c-11.315 0-20.48-9.165-20.48-20.48 0-133.961-.356-124.654.819-128.627 2.483-8.512 10.342-14.733 19.661-14.733h163.84c11.315 0 20.48 9.165 20.48 20.48z" fill="#ffe773"/><path d="m358.4 228.693v112.64h-71.68c-68.544 0-124.979-51.789-132.301-118.387 2.483-8.512 10.342-14.733 19.661-14.733h163.84c11.315 0 20.48 9.165 20.48 20.48z" fill="#ffec8f"/><path d="m256 315.733c-9.426 0-17.067-7.641-17.067-17.067v-17.066c0-9.426 7.641-17.067 17.067-17.067s17.067 7.641 17.067 17.067v17.067c0 9.425-7.641 17.066-17.067 17.066z" fill="#999"/></svg> {{LANG Secured payment transaction}}
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+
+<script>
+//redirectToPayPal($(this));
+
+function purchaseProPaypal(element) {
+    ElementText = element.text();
+    element.text("{{LANG Please wait..}}");
+    element.attr('disabled', 'true');
+    $.get('{{CONFIG ajax_url}}/get-pro-url', function (data) {
+        if (data.status == 200) {
+            element.text("{{LANG Redirecting..}}");
+            location.href = data.url;
+        } else {
+            element.text("{{LANG Oops, an error found.}}");
+            element.removeAttr('disabled');
+            console.log(data.error);
+        }
+    });
+}
+
+function purchaseProStripe(element) {
+	var title = '{{LANG Pro Plan}}';
+	var price = '{{CONFIG pro_price}}';
+
+	getText = element.text();
+	element.attr('disabled', 'true');
+	element.text("{{LANG Please wait..}}");
+
+	var fd = new FormData();
+	fd.append('description', title);
+	fd.append('price', price);
+	fd.append('payType', 'pro_purchase');
+	fd.append('trackID', '');
+	fd.append('hash_id', $('.main_session').val() );
+
+	fetch('{{CONFIG ajax_url}}/new-stripe-pro', {
+		method: 'POST',
+		body : fd
+	}).then(function(response) {
+		return response.json();
+	}).then(function(session) {
+		var stripe = Stripe('{{CONFIG stripe_id}}');
+		return stripe.redirectToCheckout({ sessionId: session.id });
+	}).then(function(result) {
+		// If redirectToCheckout fails due to a browser or network
+		// error, you should display the localized error message to your
+		// customer using error.message.
+		if (result.error) {
+			alert(result.error.message);
+		}
+	})
+	.catch(function(error) {
+		console.error('Error:', error);
+	});
+}
+
+function _purchaseProStripe(element) {
+    var title = '{{LANG Pro Plan}}';
+    var price = '{{CONFIG pro_price}}';
+
+    getText = element.text();
+    element.attr('disabled', 'true');
+    element.text("{{LANG Please wait..}}");
+
+    let script = document.createElement('script');
+    script.src = 'https://checkout.stripe.com/checkout.js';
+    script.type = 'text/javascript';
+    script.onload = script.onreadystatechange = function() {
+        if ( !this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+            if (typeof StripeCheckout !== 'undefined'){
+                let handler = StripeCheckout.configure({
+                    key: '{{CONFIG stripe_id}}',
+                    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                    locale: 'english',
+                    token: function (token) {
+                        $.post('{{CONFIG ajax_url}}/stripe-pro', {
+                            stripeToken: token.id,
+                            description: title,
+                            price: price,
+                            payType: 'pro_purchase',
+                            trackID: ''
+                        }, function (data) {
+                            if (data.status == 200) {
+                                window.location = data.url;
+                            }else{
+                                alert(data.message);
+                            }
+                        });
+                    }
+                });
+                handler.open({
+                    name: '{{CONFIG name}}',
+                    description: title,
+                    currency: '{{CONFIG currency}}',
+                    amount: price * 100,
+                    opened: function () {
+
+                    },
+                    closed: function () {
+                        element.text("{{LANG Credit Card}}");
+                        element.attr('disabled', 'false');
+                    }
+                });
+            }
+        }
+    };
+    let head  = document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+
+    $(window).on('popstate', function() {
+        handler.close();
+
+    });
+}
+
+function purchaseProBank(element) {
+    var title = '{{LANG Pro Plan}}';
+    var price = '{{CONFIG pro_price}}';
+
+
+    $('#btn-upload-receipt').attr('data-id', 1);
+    $('#btn-upload-receipt').attr('data-mode', 'pro');
+    $('#btn-upload-receipt').attr('data-title', title);
+    $('#btn-upload-receipt').attr('data-price', price);
+
+    // $('#bank_transfer_price').text('<?php echo $music->config->currency_symbol;?>' + getPrice());
+    //$('#bank_transfer_description').text(getDescription());
+    $('#receipt_img_path').html('');
+    $('#receipt_img_preview').attr('src', '');
+    $('.bank_transfer_modal').removeClass('up_rec_img_ready, up_rec_active');
+    $('.bank_transfer_modal').modal('show');
+}
+</script>

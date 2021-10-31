@@ -1,0 +1,27 @@
+<div class="ma_page_content sfy_pc_padd">
+	<div class="ma_pc_inner">
+		<?php echo loadPage('sidebar/top-header')?>
+		<?php echo GetAd('header');?>
+		<?php if ( $music->announcement !== '' ) {?>
+			<div class="announcement-renderer">{{ANNOUNCEMENT}}</div>
+		<?php } ?>
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="feed_post_block" id="user-feed-data">
+					{{html}}
+				</div>
+				<?php if($music->feedcount > 0){?>
+					<div class="text-center see_all">
+						<a href="javascript:void(0); loadMore('songs', 'all');" id="load-more-button"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"></path></svg></span> {{LANG Load More}}</a>
+					</div>
+				<?php }?>
+			</div>
+			<div class="col-lg-4">
+				{{artist_sidebar}}
+				{{ads}}
+				<?php echo GetAd('side_bar');?>
+				{{weekly_sidebar}}
+			</div>
+		</div>
+	</div>
+</div>
