@@ -1,0 +1,199 @@
+<div class="modal fade" id="wallet_payment_modal" tabindex="-1" role="dialog" aria-labelledby="track_unreported" aria-hidden="true" data-id="0">
+    <div class="modal-dialog mat_box" role="document">
+        <div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">{{LANG Choose a payment method.}}</h5>
+			</div>
+            <div class="modal-body">
+				<div class="pay_method">
+					<?php if($music->config->paypal_payment == 'on'){?>
+						<button class="btn btn-mat valign" onclick="purchaseWalletPaypal($(this),'{{PRICE}}')" id="btn-wallet-paypal-payment" data-id="" data-title="" data-price="{{PRICE}}">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M20.067 8.478c.492.88.556 2.014.3 3.327-.74 3.806-3.276 5.12-6.514 5.12h-.5a.805.805 0 0 0-.794.68l-.04.22-.63 3.993-.032.17a.804.804 0 0 1-.794.679H7.72a.483.483 0 0 1-.477-.558L7.418 21h1.518l.95-6.02h1.385c4.678 0 7.75-2.203 8.796-6.502zm-2.96-5.09c.762.868.983 1.81.752 3.285-.019.123-.04.24-.062.36-.735 3.773-3.089 5.446-6.956 5.446H8.957c-.63 0-1.174.414-1.354 1.002l-.014-.002-.93 5.894H3.121a.051.051 0 0 1-.05-.06l2.598-16.51A.95.95 0 0 1 6.607 2h5.976c2.183 0 3.716.469 4.523 1.388z" fill="currentColor"></path></svg>{{LANG PayPal}}
+						</button>
+					<?php } ?>
+					<?php if($music->config->stripe_payment == 'on'){?>
+						<button class="btn btn-mat valign" onclick="purchaseWalletStripe($(this),'{{PRICE}}')" id="btn-wallet-stripe-payment" data-id="" data-title="" data-price="{{PRICE}}">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm17 9H4v7h16v-7zm0-4V5H4v3h16z" fill="currentColor"></path></svg>{{LANG Credit Card}}
+						</button>
+					<?php } ?>
+                    <?php if($music->config->bank_payment == 'on'){?>
+						<button class="btn btn-mat valign" onclick="purchaseWalletBank($(this),'{{PRICE}}')" id="btn-wallet-bank-payment" data-id="" data-title="" data-price="{{PRICE}}">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M2 20h20v2H2v-2zm2-8h2v7H4v-7zm5 0h2v7H9v-7zm4 0h2v7h-2v-7zm5 0h2v7h-2v-7zM2 7l10-5 10 5v4H2V7zm2 1.236V9h16v-.764l-8-4-8 4zM12 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" fill="currentColor"></path></svg>{{LANG Bank transfer}}
+						</button>
+                    <?php } ?>
+				</div>
+            </div>
+        </div>
+    </div>
+	<input id="wallet_amount" type="hidden" value="{{PRICE}}">
+</div>
+
+<div class="modal fade" id="stripe_modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog mat_box" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">{{LANG Credit Card}}</h5>
+			</div>
+			<form id="stripe_form" method="post">
+				<div class="modal-body">
+					<div id="stripe_alert"></div>
+					<div class="sfy_mat_input">
+						<input type="text" placeholder="{{LANG Name}}" value="{{ME name}}" id="stripe_name">
+						<label for="stripe_name">{{LANG Name}}</label>
+					</div>
+					<div class="sfy_mat_input">
+						<input type="email" placeholder="{{LANG Email}}" value="{{ME email}}" id="stripe_email">
+						<label for="stripe_email">{{LANG Email}}</label>
+					</div>
+					<hr>
+					<div class="sfy_mat_input">
+						<input id="stripe_number" type="text" placeholder="{{LANG Card Number}}">
+						<label for="stripe_number">{{LANG Card Number}}</label>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="sfy_mat_input">
+								<select id="stripe_month" class="sfy_select_has_label">
+									<option value="01">01</option>
+									<option value="02">02</option>
+									<option value="03">03</option>
+									<option value="04">04</option>
+									<option value="05">05</option>
+									<option value="06">06</option>
+									<option value="07">07</option>
+									<option value="08">08</option>
+									<option value="09">09</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+								<label for="stripe_month">{{LANG Month}}</label>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="sfy_mat_input">
+								<select id="stripe_year" class="sfy_select_has_label">
+									<?php for ($i=date('Y'); $i <= date('Y')+15; $i++) {  ?>
+									<option value="<?php echo($i) ?>"><?php echo($i) ?></option>
+									<?php } ?>
+								</select>
+								<label for="stripe_month">{{LANG Year}}</label>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="sfy_mat_input">
+								<input id="stripe_cvc" type="text" autocomplete="off" placeholder="CVC" maxlength="3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+								<label for="stripe_cvc">CVC</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-mat" data-dismiss="modal">{{LANG Cancel}}</button>
+					<button type="button" class="btn btn-primary btn-mat" onclick="SH_StripeRequest()" id="stripe_button">{{LANG Pay}}</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+    function purchaseWalletPaypal(element) {
+        ElementText = element.text();
+        element.text("{{LANG Please wait..}}");
+        element.attr('disabled', 'true');
+        $.get('{{CONFIG ajax_url}}/get-wallet-url?price={{PRICE}}', function (data) {
+            if (data.status == 200) {
+                element.text("{{LANG Redirecting..}}");
+                location.href = data.url;
+            } else {
+                element.text("{{LANG Oops, an error found.}}");
+                element.removeAttr('disabled');
+                console.log(data.error);
+            }
+        });
+    }
+
+    function openStripeModel(){
+        //$('#stripe_email').val($('#stripe_email').attr('data-email'));
+        $('#stripe_number').val('');
+        $('#stripe_cvc').val('');
+        $('#stripe_modal').removeClass('up_rec_img_ready, up_rec_active');
+        $('#stripe_modal').modal('show');
+	}
+    var stripe_array = [];
+    function SH_StripeRequest(argument) {
+        if ($("#stripe_name").val() != '' && $("#stripe_email").val() != '' && $("#stripe_number").val() != '' && $("#stripe_month").val() != '' && $("#stripe_year").val() != '' && $("#stripe_cvc").val() != '' && $("#wallet_amount").val() != '') {
+            var script = document.createElement('script');
+            script.src = 'https://js.stripe.com/v2/';
+            script.type = 'text/javascript';
+            script.onload = script.onreadystatechange = function() {
+                Stripe.setPublishableKey('{{CONFIG stripe_id}}');
+
+                $('#stripe_button').attr('disabled', 'true');
+                $('#stripe_button').text("{{LANG Please wait..}}");
+                stripe_array['stripe_name'] = $('#stripe_name').val();
+                stripe_array['stripe_email'] = $('#stripe_email').val();
+                stripe_array['stripe_number'] = $('#stripe_number').val();
+                stripe_array['stripe_month'] = $('#stripe_month').val();
+                stripe_array['stripe_year'] = $('#stripe_year').val();
+                stripe_array['stripe_cvc'] = $('#stripe_cvc').val();
+                stripe_array['amount'] = $('#wallet_amount').val();
+                Stripe.createToken({
+                    number: $('#stripe_number').val(),
+                    exp_month: $('#stripe_month').val(),
+                    exp_year: $('#stripe_year').val(),
+                    cvc: $('#stripe_cvc').val()
+                }, SH_StripeResponseHandler);
+            };
+            let head  = document.getElementsByTagName('head')[0];
+            head.appendChild(script);
+        }
+        else{
+            $('#stripe_alert').html("{{LANG Please check your details}}");
+        }
+    }
+    function SH_StripeResponseHandler(status, response) {
+        if (response.error) {
+            $('#stripe_alert').html(response.error.message);
+            $('#stripe_button').removeAttr('disabled');
+            $('#stripe_button').text("{{LANG Pay}}");
+        } else {
+            stripe_array['token'] = response.id;
+
+            $.post('{{CONFIG ajax_url}}/stripe-wallet', {
+                stripeToken: stripe_array['token'],
+                stripe_name: stripe_array['stripe_name'],
+                stripe_email: stripe_array['stripe_email'],
+                stripe_number: stripe_array['stripe_number'],
+                stripe_month: stripe_array['stripe_month'],
+                stripe_year: stripe_array['stripe_year'],
+                stripe_cvc: stripe_array['stripe_cvc'],
+                amount: stripe_array['amount'],
+                description: 'Replenish My Balance',
+                price: stripe_array['amount'],
+                payType: 'wallet',
+                trackID: ''
+            }, function (data) {
+                if (data.status == 200) {
+                    window.location = data.url;
+                }else{
+                    alert(data.message);
+                }
+            });
+        }
+    }
+    function purchaseWalletBank(element,price) {
+        var title = '{{LANG Replenish My Balance}}';
+
+        $('#btn-upload-receipt').attr('data-id', 1);
+        $('#btn-upload-receipt').attr('data-mode', 'wallet');
+        $('#btn-upload-receipt').attr('data-title', title);
+        $('#btn-upload-receipt').attr('data-price', price);
+
+        $('#receipt_img_path').html('');
+        $('#receipt_img_preview').attr('src', '');
+        $('.bank_transfer_modal').removeClass('up_rec_img_ready, up_rec_active');
+        $('.bank_transfer_modal').modal('show');
+    }
+</script>
